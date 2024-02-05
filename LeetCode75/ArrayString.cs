@@ -46,4 +46,39 @@ internal class ArrayString
 
         return builder.ToString();
     }
+
+    // Easy 1071. Greatest Common Divisor of Strings
+    /// <summary>
+    /// For two strings s and t, we say "t divides s" if and only if s = t + ... + t
+    /// (i.e., t is concatenated with itself one or more times).
+    /// Given two strings str1 and str2, return the largest string x such that x divides both str1 and str2.
+    /// </summary>
+    /// <param name="str1"></param>
+    /// <param name="str2"></param>
+    /// <returns>The largest string x such that x divides both str1 and str2</returns>
+    internal static string GcdOfStrings(string str1, string str2)
+    {
+        string result = string.Empty;
+        string biggestString = str1.Length > str2.Length ? str1 : str2;
+        string smallestString = str1.Length > str2.Length ? str2 : str1;
+        for (int i = smallestString.Length; i >= 0; i--)
+        {
+            string divisor = smallestString[0..i];
+            var bigDivided = biggestString.Split(divisor);
+            var smallDivided = smallestString.Split(divisor);
+            if (bigDivided.Any(s => s == biggestString))
+            {
+                break;
+            }
+            if (bigDivided.Any(s => s.Length > 0) || smallDivided.Any(s => s.Length > 0))
+            {
+                continue;
+            }
+
+            result = divisor;
+            break;
+        }
+
+        return result;
+    }
 }
