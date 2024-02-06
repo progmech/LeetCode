@@ -81,4 +81,21 @@ internal class ArrayString
 
         return result;
     }
+
+    // Easy 1431. Kids With the Greatest Number of Candies
+    /// <summary>
+    /// There are n kids with candies. You are given an integer array candies, 
+    /// where each candies[i] represents the number of candies the ith kid has, 
+    /// and an integer extraCandies, denoting the number of extra candies that you have.
+    /// Note that multiple kids can have the greatest number of candies.
+    /// </summary>
+    /// <param name="candies"></param>
+    /// <param name="extraCandies"></param>
+    /// <returns>A boolean array result of length n, where result[i] is true if,
+    /// after giving the ith kid all the extraCandies, they will have the greatest
+    /// number of candies among all the kids, or false otherwise.</returns>
+    internal static IList<bool> KidsWithCandies(int[] candies, int extraCandies)
+    {
+        return candies.Select(x => x + extraCandies >= candies.Max()).ToArray();
+    }
 }
